@@ -1,0 +1,298 @@
+/* =========================================================
+   Job Listings – base styles (mobile first)
+   Desktop overrides live in mediaquery.css
+   ========================================================= */
+
+:root {
+  --primary: #5ca5a5;        /* desaturated dark cyan */
+  --bg: #effafa;             /* light grayish cyan (page) */
+  --tag-bg: #eef6f6;         /* light grayish cyan (tags) */
+  --grey: #7b8e8e;           /* dark grayish cyan */
+  --dark: #2c3a3a;           /* very dark grayish cyan */
+  --white: #ffffff;
+  --line: #b7c4c4;
+
+  --shadow: 0 15px 20px -5px rgba(13, 113, 130, 0.15);
+  --font: "League Spartan", system-ui, sans-serif;
+
+  --header-h: 156px;
+  --gutter: 24px;
+}
+
+/* ---------- Reset / base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--grey);
+  background: var(--bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dark);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* visually hidden but available to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.container {
+  width: min(1110px, 100% - (var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+/* ---------- Header banner ---------- */
+.header {
+  height: var(--header-h);
+  background: var(--primary) url("images/bg-header-mobile.svg") center / cover no-repeat;
+}
+
+/* ---------- Filter bar (overlaps the banner) ---------- */
+.filters {
+  position: relative;
+  z-index: 2;
+  margin-top: -36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.filters__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.chip {
+  display: flex;
+  align-items: stretch;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--tag-bg);
+}
+
+.chip__label {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.chip__remove {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  background: var(--primary);
+  transition: background 0.2s ease;
+}
+
+.chip__remove:hover,
+.chip__remove:focus-visible {
+  background: var(--dark);
+}
+
+.chip__remove img {
+  width: 14px;
+  height: 14px;
+}
+
+.filters__clear {
+  flex-shrink: 0;
+  color: var(--grey);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.filters__clear:hover,
+.filters__clear:focus-visible {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ---------- Job list ---------- */
+.jobs {
+  display: grid;
+  gap: 40px;                 /* room for the logos that overlap each card's top edge */
+  margin-top: 56px;
+  padding-bottom: 64px;
+}
+
+.job {
+  position: relative;
+  padding: 36px 20px 20px;
+  background: var(--white);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+/* featured jobs get a teal strip on the left (inset shadow = no layout shift) */
+.job--featured {
+  box-shadow: inset 5px 0 0 var(--primary), var(--shadow);
+}
+
+.job__logo {
+  position: absolute;
+  top: -24px;
+  left: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.job__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 8px;
+}
+
+.job__company {
+  margin-right: 8px;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.badge {
+  padding: 6px 8px 4px;
+  border-radius: 999px;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.badge--new {
+  background: var(--primary);
+}
+
+.badge--featured {
+  background: var(--dark);
+}
+
+.job__title {
+  margin: 10px 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--dark);
+}
+
+.job__title a {
+  transition: color 0.2s ease;
+}
+
+.job__title a:hover,
+.job__title a:focus-visible {
+  color: var(--primary);
+}
+
+/* "1d ago • Full Time • USA Only" */
+.job__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.9375rem;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.job__meta li + li::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 9px;
+  border-radius: 50%;
+  background: var(--line);
+  vertical-align: middle;
+}
+
+.job__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tag {
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tag:hover,
+.tag:focus-visible {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* message if the JSON cannot be loaded */
+.jobs__error {
+  padding: 24px;
+  background: var(--white);
+  border-radius: 5px;
+  color: var(--dark);
+  line-height: 1.5;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Listings with Filtering</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mediaquery.css" />
+
+  <!-- data.js is only a safety net for when the page is opened by double-clicking
+       (browsers block fetch() on file://). With a local server, data.json is used. -->
+  <script src="data.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Teal banner (background image is set in the CSS) -->
+  <header class="header"></header>
+
+  <main class="container">
+    <h1 class="sr-only">Job listings</h1>
+
+    <!-- Active filters: hidden until at least one tag is selected -->
+    <section class="filters" id="filters" aria-label="Active filters" hidden>
+      <ul class="filters__list" id="filterList"></ul>
+      <button type="button" class="filters__clear" id="clearBtn">Clear</button>
+    </section>
+
+    <!-- Screen-reader announcement of how many jobs are showing -->
+    <p class="sr-only" id="status" role="status" aria-live="polite"></p>
+
+    <!-- Job cards are built from data.json by script.js -->
+    <ul class="jobs" id="jobs" aria-label="Job listings"></ul>
+  </main>
+</body>
+</html>
